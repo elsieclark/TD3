@@ -42,13 +42,9 @@ class Tile: SKSpriteNode {
             
             barrier = !barrier
             
-            reskin()
+            self.reskin()
         
         }
-        
-        
-        
-        
     }
     
     func reskin() {
