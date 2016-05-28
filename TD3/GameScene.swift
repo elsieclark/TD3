@@ -47,20 +47,16 @@ class GameScene: SKScene {
     
 
     
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//       /* Called when a touch begins */
-//
-//        tileGrid.reskinAll()
-// 
-//        let newPath = tileGrid.pathFind(90, endTile: 9)
-//        
-//
-//        for i in newPath {
-//            tileGrid.colourTile(i.location, newColour: UIColor.greenColor())
-//        }
-//
-//        
-//    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+       /* Called when a touch begins */
+
+        for i in tileGrid.tileArr {
+            i.barrier = false
+        }
+        tileGrid.reskinAll()
+
+        
+    }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */

@@ -99,7 +99,7 @@ class TileGrid: SKNode {
                 if i % 2 == 0 { // Up, down, left, or right
                     candidate.pastCost = open[0].pastCost + 1
                 } else { // Diagonals
-                    candidate.pastCost = open[0].pastCost + 0.99 * sqrt(2)
+                    candidate.pastCost = open[0].pastCost + sqrt(2)
                     
                     let cwBarrier : Int = getDirFromDirNumb((i+1)%8, loc: open[0].location)
                     
@@ -127,12 +127,15 @@ class TileGrid: SKNode {
                 
                 let placeInOpen = tileInArray(candidate.location, array: open)
                 
-                if (valid && candidate.location >= 0 && candidate.location < 100 && !tileArr[candidate.location].barrier && tileInArray(candidate.location, array: closed) == -1 && placeInOpen == -1) {
+                if (valid && candidate.location >= 0 && candidate.location < 100 && !tileArr[candidate.location].barrier && tileInArray(candidate.location, array: closed) == -1) {
+    
+                    if placeInOpen == -1 {
+                        open.append(candidate)
+                    } else if (candidate.totalCost < open[placeInOpen].totalCost){
+                        open.removeAtIndex(placeInOpen)
+                        open.append(candidate)
+                    }
                     
-                    let status : String = String(valid) + " " + String(candidate.location) + " " + String(candidate.direction) + " " + String(open[0].location)
-                    
-                    
-                    open.append(candidate)
                     
                 }
             }
